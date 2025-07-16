@@ -6,17 +6,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
+const PORT=4500;
 
 // Main route 
 app.get('/',(req,res)=>{
-   res.send('serrver is runing')
+   res.send('server is running')
+})
+
+// student post api
+
+app.post("/student",(req,res)=>{
+
+   res.json({
+      'msg':'record saved !'
+   })
+
 })
 
 
 
-//create server Listining
-app.listen(4500,()=>{
+//create server Listening
+app.listen(PORT,()=>{
    console.log('server is running on http://localhost:4500');
 })
 
