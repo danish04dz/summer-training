@@ -34,7 +34,7 @@ app.get('/',(req,res)=>{
 
 // student post api
 
-app.post("/student",(req,res)=>{
+app.post("/student",async (req,res)=>{
 
   const {rollNo,name,mobile}=req.body;
 
@@ -47,7 +47,7 @@ app.post("/student",(req,res)=>{
 
   // save to database 
   try {
-   newStudent.save();
+   await newStudent.save();
    res.status(201).json({message:"student created succesfully",
       Student :{
       rollNo:newStudent.rollNo,
@@ -64,17 +64,14 @@ app.post("/student",(req,res)=>{
 
 // get data
 
-app.get("/student",(req,res)=>{
+app.get("/student", async(req,res)=>{
 
    // get all student data
-   Student.find()
-   .then((allStudents)=>{
-      res.status(200).json(allStudents);
-   })
-   .catch((error)=>{
-      console.log(error);
-      res.status(500).send("Error fetching data");
-   })
+
+   const allStudent= await Student.find();
+
+   res.status(200).json(allStudent);
+   
    
 })
 
